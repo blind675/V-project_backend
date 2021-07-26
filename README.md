@@ -1,3 +1,12 @@
-# Strapi application
+# V-project Backend
 
-A quick description of your strapi application
+A distributed project management backend. (Strapi build).
+
+### Development
+
+#### Requirements
+Node: version 14 only
+
+### Rune development
+
+`yarn develop`
