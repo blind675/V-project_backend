@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "organisations",
+  "info": {
+    "name": "Organisation"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "logo": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "color": {
+      "type": "string"
+    },
+    "owner": {
+      "via": "own",
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "managers": {
+      "via": "manages",
+      "plugin": "users-permissions",
+      "collection": "user"
+    }
+  }
+}

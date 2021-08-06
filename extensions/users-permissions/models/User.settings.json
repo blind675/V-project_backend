@@ -66,6 +66,15 @@
     "lastName": {
       "type": "string",
       "required": true
+    },
+    "own": {
+      "model": "organisation",
+      "via": "owner"
+    },
+    "manages": {
+      "collection": "organisation",
+      "via": "managers",
+      "dominant": true
     }
   }
 }
