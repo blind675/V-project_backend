@@ -31,8 +31,8 @@ module.exports = {
     await strapi.plugins['email'].services.email.send({
       to: 'catalin.bora@gmail.com',
       from: 'bob@reactive-boards.com',
-      subject: 'V-Project Organisation Request',
-      text: 'Some one created a new Organisation in V-Project. Please approve or deny it!',
+      subject: 'v-Project Organisation Request',
+      text: 'Some one created a new Organisation in v-Project. Please approve or deny it!',
     });
 
     // TODO: return a status not the object

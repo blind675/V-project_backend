@@ -75,6 +75,10 @@
       "collection": "organisation",
       "via": "managers",
       "dominant": true
+    },
+    "notifications": {
+      "via": "user",
+      "collection": "notification"
     }
   }
 }
