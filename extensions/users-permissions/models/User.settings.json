@@ -68,17 +68,25 @@
       "required": true
     },
     "own": {
-      "model": "organisation",
-      "via": "owner"
+      "via": "owner",
+      "model": "organisation"
     },
     "manages": {
-      "collection": "organisation",
       "via": "managers",
+      "collection": "organisation",
       "dominant": true
     },
     "notifications": {
       "via": "user",
       "collection": "notification"
+    },
+    "my_organisations": {
+      "via": "members",
+      "collection": "organisation"
+    },
+    "projects": {
+      "via": "owner",
+      "collection": "project"
     }
   }
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
+const {parseMultipartData, sanitizeEntity} = require('strapi-utils');
 
 module.exports = {
   /**
@@ -14,12 +14,12 @@ module.exports = {
 
     let entity;
     if (ctx.is('multipart')) {
-      const { data, files } = parseMultipartData(ctx);
+      const {data, files} = parseMultipartData(ctx);
 
       // TODO: this is a hack
       data.published_at = null;
       data.owner = userID;
-      entity = await strapi.services.organisation.create(data, { files });
+      entity = await strapi.services.organisation.create(data, {files});
     } else {
 
       const data = ctx.request.body;
@@ -36,6 +36,25 @@ module.exports = {
     });
 
     // TODO: return a status not the object
-    return sanitizeEntity(entity, { model: strapi.models.organisation });
+    return sanitizeEntity(entity, {model: strapi.models.organisation});
   },
+
+  async join(ctx) {
+    const {id: userID} = await strapi.plugins['users-permissions'].services.jwt.getToken(ctx);
+    const user = await strapi.query('user', 'users-permissions').findOne({ id:userID }, ['role']);
+    const {id} = ctx.params;
+
+    const org = await strapi.services.organisation.findOne({id});
+
+    // TODO: if auto join
+    org.members.push(user);
+    const updatedOrg = await strapi.services.organisation.update({id}, {
+      members: org.members
+    });
+
+    // TODO: notify user
+    // TODO: notify org manage/owner
+    // TODO: send email to someone ?
+    return sanitizeEntity(updatedOrg, {model: strapi.models.organisation});
+  }
 };

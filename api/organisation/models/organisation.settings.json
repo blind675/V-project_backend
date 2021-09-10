@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "organisations",
   "info": {
-    "name": "Organisation"
+    "name": "Organisation",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -39,6 +40,25 @@
       "via": "manages",
       "plugin": "users-permissions",
       "collection": "user"
+    },
+    "auto_join": {
+      "type": "boolean",
+      "default": true,
+      "private": false
+    },
+    "public_projects": {
+      "type": "boolean",
+      "default": true
+    },
+    "members": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "my_organisations",
+      "dominant": true
+    },
+    "projects": {
+      "via": "organisation",
+      "collection": "project"
     }
   }
 }
